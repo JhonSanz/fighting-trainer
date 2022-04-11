@@ -8,25 +8,24 @@ function App() {
     setFullHeight(document.documentElement.clientHeight);
   }, [document.documentElement.clientHeight]);
 
+  let hit = 0;
   const [seconds, setSeconds] = useState(1);
   const [hits, setHits] = useState(0);
 
   const generateHit = () => {
-    return Math.floor(Math.random() * (8 - 1)) + 1
+    return Math.floor(Math.random() * (9 - 1)) + 1
   }
-  let hit = 0;
+
   useEffect(() => {
-    if (seconds >= 0) {
-      setTimeout(() => setSeconds(seconds - 1), 300);
-    } else {
+    setTimeout(() => {
+      setSeconds(seconds + 1);
       hit = generateHit();
       if (hit === hits) {
-        hit = hits + 1 < 8 ? hits + 1 : hit - 1;
+        hit = hits + 1 < 9 ? hits + 1 : hit - 1;
       }
       setHits(hit);
-      setSeconds(1);
-    }
-  });
+    }, 300);
+  }, [seconds]);
 
   return (
     <div>
