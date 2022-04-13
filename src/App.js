@@ -11,9 +11,14 @@ function App() {
   let hit = 0;
   const [seconds, setSeconds] = useState(1);
   const [hits, setHits] = useState(0);
+  const [color, setColor] = useState('red')
 
   const generateHit = () => {
     return Math.floor(Math.random() * (9 - 1)) + 1
+  }
+
+  const generateRandomColor = () => {
+    return Math.floor(Math.random() * (3 - 1)) + 1
   }
 
   useEffect(() => {
@@ -21,10 +26,11 @@ function App() {
       setSeconds(seconds + 1);
       hit = generateHit();
       if (hit === hits) {
-        hit = hits + 1 < 9 ? hits + 1 : hit - 1;
+        hit = (hits + 1) < 9 ? (hits + 1) : (hit - 1);
       }
       setHits(hit);
-    }, 300);
+      setColor(generateRandomColor() === 1 ? 'red' : 'green')
+    }, 800);
   }, [seconds]);
 
   return (
@@ -47,9 +53,9 @@ function App() {
                 justifyContent: 'space-between',
               }}
             >
-              <div style={{ width: 10, backgroundColor: hits === 1 ? 'red' : 'transparent' }}></div>
-              <div style={{ width: 10, backgroundColor: hits === 2 ? 'red' : 'transparent' }}></div>
-              <div style={{ width: 10, backgroundColor: hits === 3 ? 'red' : 'transparent' }}></div>
+              <div style={{ width: 10, backgroundColor: hits === 1 ? color : 'transparent' }}></div>
+              <div style={{ width: 10, backgroundColor: hits === 2 ? color : 'transparent' }}></div>
+              <div style={{ width: 10, backgroundColor: hits === 3 ? color : 'transparent' }}></div>
             </Grid>
           </Grid>
           <Grid container style={{ height: fullHeight / 3 }}>
@@ -61,9 +67,9 @@ function App() {
                 justifyContent: 'space-between',
               }}
             >
-              <div style={{ width: 10, backgroundColor: hits === 4 ? 'red' : 'transparent' }}></div>
-              <div style={{ width: 10, backgroundColor: hits === 5 ? 'red' : 'transparent' }}></div>
-              <div style={{ width: 10, backgroundColor: hits === 6 ? 'red' : 'transparent' }}></div>
+              <div style={{ width: 10, backgroundColor: hits === 4 ? color : 'transparent' }}></div>
+              <div style={{ width: 10, backgroundColor: hits === 5 ? color : 'transparent' }}></div>
+              <div style={{ width: 10, backgroundColor: hits === 6 ? color : 'transparent' }}></div>
             </Grid>
           </Grid>
           <Grid container style={{ height: fullHeight / 3 }}>
@@ -75,8 +81,8 @@ function App() {
                 justifyContent: 'space-between',
               }}
             >
-              <div style={{ width: 10, backgroundColor: hits === 7 ? 'red' : 'transparent' }}></div>
-              <div style={{ width: 10, backgroundColor: hits === 8 ? 'red' : 'transparent' }}></div>
+              <div style={{ width: 10, backgroundColor: hits === 7 ? color : 'transparent' }}></div>
+              <div style={{ width: 10, backgroundColor: hits === 8 ? color : 'transparent' }}></div>
             </Grid>
           </Grid>
         </Grid>
